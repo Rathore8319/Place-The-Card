@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place the Card</title>
+</head>
+<style>
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+@font-face {
+    font-family: retroFont;
+    src: url(JustMyType-KePl.ttf);
+}
+
+/* Travel Animation */
+    #travel_animation{
+        display: none;
+        width: 1200px;
+        height: 90vh;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 3vh;
+        /* transform: rotate(180deg); */
+    }
+
+    #travel_animation img{
+        width: 100%;
+        /* transform: translate(0%, 0.5%); */
+        height: 95%;
+    }
+
+/* Game Codes */
+    #GameContainer, #ResultContainer, #preload{
+        width: 1200px;
+        height: 90vh;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 3vh;
+        transition: 1s;
+        display: block;
+        background-image: url(bg.jpg);
+        overflow: hidden;
+        box-shadow: 0px 0px 2px 2px rgba(162, 162, 162, 0.878) inset;
+        border-radius: 10px;
+        background-image: url(cantainer.jpg);
+        background-size: cover;
+        /* transform: scale(0.6); */
+    }
+
+    #preload{
+        background-image: none;
+        background-color: black;
+    }
+
+    #preload_cards{
+        width: 400px;
+        height: 400px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%) scale(0.5);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    #preload1, #preload2, #preload3, #preload4{
+        width: 200px;
+        height: 200px;
+        border: solid 4px white;
+        margin-left: auto;
+        margin-right: auto;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+    }
+
+
+    #preload1{
+        border-bottom-right-radius: 40px;
+        animation-name: preload1;
+    }#preload2{
+        border-bottom-left-radius: 40px;
+        animation-name: preload2;
+    }#preload3{
+        border-top-right-radius: 40px;
+        animation-name: preload3;
+    }#preload4{
+        border-top-left-radius: 40px;
+        animation-name: preload4;
+    }
+@keyframes preload1 {
+    from{transform: translate(-50%,-50%);}
+}
+@keyframes preload2 {
+    from{transform: translate(50%,-50%);}
+}
+@keyframes preload3{
+    from{transform: translate(-50%,50%)}
+}
+@keyframes preload4{
+    from{transform: translate(50%,50%);}
+}
+    #GameContainer{
+        display: none;
+        animation-name: showgame;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+    }
+@keyframes showgame {
+    from{height: 0vh;}
+    to{height: 90vh;}
+}
+
+    #ResultContainer{
+        display: none;
+    }
+
+    #card_space, #card_space_2{
+        width: max-content;
+        height: max-content;
+        /* background-color: gray; */
+        
+        /* Display properties */
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-gap: 20px;
+
+        /* Align center */
+        padding-top: 3vh;
+        padding-bottom: 5vh;
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #div3, #div2, #div1{
+        width: 500px;
+        height: 500px;
+        position: absolute;
+        background-color: rgba(225, 225, 225, 0.3);
+        z-index: 1;
+        text-align: center;
+        animation-name: grow-in;
+        animation-duration: 1s;
+        border-radius: 500px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%) scale(100%);
+    }
+
+    #div3{
+        display: none;
+    }#div2{
+        display: none;
+    }#div1{
+        display: none;
+    }
+
+@keyframes grow-in {
+    0%{transform: translate(-50%,-50%) scale(100%) ;}
+    100%{transform: translate(-50%,-50%) scale(0%);}
+}
+
+    #text img{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+
+
+
+    #card, #card2{
+        width: 200px;
+        height: 300px;
+        background-color: rgba(224, 224, 224, 0.496);
+        margin: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 4px 2px rgba(162, 162, 162, 0.878) inset;
+        backdrop-filter: blur(5px);
+        overflow: hidden;
+        text-align: center;
+        background-image: url(card_.jpg);
+        background-size: cover;
+        filter: blur(5px);
+        filter: drop-shadow(0px 0px 1px black);
+    }
+
+    #card2{
+        transition: 1s;
+    }
+
+    #card_space{
+        display: grid;
+    }
+
+    #card_space_2{
+        display: none;
+        transform: translate(-10%, -11%);
+    }
+
+    img{
+        width: 150px;
+        height: 150px;
+        top: 50%;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%,-50%) scale(0.9);
+        filter: drop-shadow(0px 0px 7px black);
+    }
+
+    .hovered{
+        transform: translateY(-10%);
+    }
+
+    #controls_section{
+        width: 1200px;
+        height: 4vh;
+        margin-top: 1vh;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: rgba(225, 225, 225, 0.605);
+        border-radius: 10px;
+    }
+
+    #buttons{
+        width: 100%;
+        height: inherit;
+        border-radius: 10px;
+    }
+
+    #buttons button{
+        width: 10%;
+        height: inherit;
+        border: none;
+        border-radius: 10px;
+        font-family: retroFont;
+        font-size: 20px;
+        background-image: linear-gradient(90deg, #3A1C71,#D76D77,#FFAF7B);
+        box-shadow: 2px 2px 2px rgb(201, 201, 201);
+    }
+
+    #start{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #submit, #play_again{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #submit{
+        display: none;
+    }
+    #play_again{
+        display: none;
+    }
+
+/* Score Page */
+#circle_progress{
+    width: 400px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(197, 197, 197, 0.655);
+    backdrop-filter: blur(5px);
+    border-top-left-radius: 200px;
+    border-top-right-radius: 200px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0px 0px 3px rgb(65, 65, 65) inset;
+    margin-top: 5vh;
+    filter: drop-shadow(0px 0px 4px black);
+}
+
+#circle_progress2{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    width: 333px;
+    height: 166px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(177, 177, 177);
+    border-top-left-radius: 200px;
+    border-top-right-radius: 200px;
+    box-shadow: 0px 0px 3px rgb(65, 65, 65) inset;
+}
+
+#circle_progress_bar{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 400px;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    transform-origin: bottom;
+    background-image: radial-gradient(#64f38c,#f79d00);
+    border-top-left-radius: 200px;
+    border-top-right-radius: 200px;
+    transform: translate(-50%) rotate(-180deg);
+    transition: 2s;
+    box-shadow: 0px 0px 4px rgb(255, 255, 255);
+
+    /* animation: rotater 2s; */
+}
+
+/* @keyframes rotater {
+    0%{transform: translate(-50%) rotate(-180deg)}
+    100%{transform: translate(-50%) rotate(0deg)}
+} */
+
+#score{
+    z-index: 1;
+    font-family: retroFont;
+    font-size: 40px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+#end_section{
+    width: 700px;
+    height: 300px;
+    margin-top: 6vh;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: linear-gradient(#F8FFAE,#43C6AC);
+    /* background-blend-mode: color-dodge; */
+    box-shadow: 0px 0px 4px black inset;
+    border-radius: 20px;
+    transform: skew(-5deg);
+    backdrop-filter: blur(5px);
+}
+
+#end_stat{
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-image: linear-gradient(#c0c0aa,#1cefff);
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px 1px black;
+}
+
+#end_stat p{
+    font-size: 70px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 0px;
+    margin: 0px;
+    font-family: retroFont;
+    filter: drop-shadow(5px 5px 10px rgb(80, 80, 80));
+    color: #64f38c;
+    /* border-right: 4px solid; */
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 2s;
+    width: auto;
+}
+
+@keyframes typing {
+    from{width: 0%;}
+    to{width: 70%;}
+}
+</style>
+<body>
+<audio src="bgmGame.mp3" id = "myBGM"></audio>
+<div id = "travel_animation"><img src="travel1.gif"></div>
+
+<!-- Game Window -->
+<div id="preload">
+    <div id="preload_cards">
+        <div id="preload1">
+
+        </div>
+        <div id="preload2">
+            
+        </div>
+        <div id="preload3">
+            
+        </div>
+        <div id="preload4">
+            
+        </div>
+        <p style="color:white; transform: translate(50%,100%); font-size: 40px; font-family: retroFont; text-align: center;">loading!</p>
+    </div>
+</div>
+<div id = "GameContainer">
+    <div id = "div3">
+        <div id = "text"><img src="3.png" alt=""></div>
+    </div>
+    <div id = "div2">
+        <div id = "text"><img src="2.png" alt=""></div>
+    </div><div id = "div1">
+        <div id = "text"><img src="1.png" alt=""></div>
+    </div>
+
+    <div id = "card_space">
+        <div id = "card" draggable="true" class="1"><img src="" alt=""></div>
+        <div id = "card" draggable="true" class="2"><img src="" alt=""></div>
+        <div id = "card" draggable="true"><img src="" alt=""></div>
+        <div id = "card" draggable="true"><img src="" alt=""></div>
+        <div id = "card" draggable="true" class="5"><img src="" alt=""></div>
+        <div id = "card" draggable="true"><img src="" alt=""></div>
+        <div id = "card" draggable="true"><img src="" alt=""></div>
+        <div id = "card" draggable="true"><img src="" alt=""></div>
+    </div>
+
+    <div id = "card_space_2">
+        <div id = "card2" draggable="false"><img src="question_mark.png" alt="" draggable="false"></div>
+        <div id = "card2" draggable="false"><img src="question_mark.png" alt="" draggable="false"></div>
+        <div id = "card2" draggable="false"><img src="question_mark.png" alt="" draggable="false"></div>
+        <div id = "card2" draggable="false"><img src="question_mark.png" alt="" draggable="false"></div>
+        <div id = "card2" draggable="false"><img src="question_mark.png" alt="" draggable="false"></div>
+        <div id = "card2" draggable="false"><img src="question_mark.png" alt="" draggable="false"></div>
+        <div id = "card2" draggable="false"><img src="question_mark.png" alt="" draggable="false"></div>
+        <div id = "card2" draggable="false"><img src="question_mark.png" alt="" draggable="false"></div>
+    </div>
+</div>
+
+<div id = "ResultContainer">
+    <h1 style="font-family: retroFont; text-align: center;">Result</h1>
+    <div id = "score_card">
+        <div id = "circle_progress">
+            <div id = "circle_progress_bar"></div>
+
+            <div id = "circle_progress2">
+                <div id = "score">
+                    xx/80
+                </div>
+            </div>
+        </div>
+        <div id = "end_section">
+            <div id = "end_stat">
+                <p id = "comment"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id = "controls_section">
+    <div id = "buttons">
+        <button onclick = "stack()" id = "start">Start</button>
+        <button onclick = "submit()" id = "submit">Submit</button>
+        <button onclick = "playAgain()" id = "play_again">Play Again</button>
+    </div>
+</div>
+
+<script>
+window.addEventListener('load', () => {
+    document.getElementById("preload").style.display = "none";
+});
+// Game Window Codes
+    var init_poke_array = [];
+    let init_poke_array1 = [];
+    var final_poke_array = [];
+    var card1Space = document.querySelector("#card_space");
+    Cards = document.querySelector("#card_space").children;
+    const main_array = [];
+    var ur = "";
+
+// Setting poke cards
+    for (let i = 0; i < Cards.length; i++) {
+        const pokeElement = Cards[i];
+        const pokeImg = pokeElement.children[0];
+        // console.log(pokeImg)
+
+        // Setting random pokemon
+        var card_array = ["pikachu", "nidoking", "dragonite", "charizard", "rhydon", "flareon", "clefable", "snorlax", "vaporeon", "venusaur"];
+        let pokemon = card_array[(Math.floor(Math.random() * card_array.length))]
+        // console.log(pokemon);
+        ur = pokemon + ".png";
+
+        // Setting image
+        // console.log(ur);
+        pokeImg.src = ur;
+
+        // Setting init array
+        init_poke_array.push(pokemon);
+        main_array.push(pokemon);
+    }
+
+    console.log(init_poke_array);
+    // console.log(Cards);
+
+// Shuffling Cards
+    function shuffle(elems) {
+        allElems = (function(){
+            var ret = [], l = elems.length;
+            while (l--) { ret[ret.length] = elems[l]; }
+            return ret;
+        })();
+
+        var shuffled = (function(){
+            var l = allElems.length, ret = [];
+            while (l--) {
+                var random = Math.floor(Math.random() * allElems.length),
+                    randEl = allElems[random].cloneNode(true);
+                allElems.splice(random, 1);
+                ret[ret.length] = randEl;
+            }
+            return ret; 
+        })(), l = elems.length;
+
+        while (l--) {
+            elems[l].parentNode.insertBefore(shuffled[l], elems[l].nextSibling);
+            elems[l].parentNode.removeChild(elems[l]);
+        }
+    };
+
+        var button = document.querySelector('button');
+        // button.addEventListener('click', function() {  }, false);
+
+
+// Starting Game -->
+function stack(){
+    document.getElementById("GameContainer").style.display = "block";
+    let audio1 = document.getElementById("myBGM");
+    audio1.play();
+    audio1.loop = true;
+    let three = setTimeout(threeA, 7000);
+    let two = setTimeout(twoA, 8000);
+    let one = setTimeout(oneA, 9000);
+
+    let anime = setTimeout(anima, 10000);
+    let timein = setTimeout(start, 11000);
+}
+let threed = document.getElementById("div3");
+let twod = document.getElementById("div2");
+let oned = document.getElementById("div1");
+
+    function threeA(){threed.style.display = "block"; twod.style.display = "none"; oned.style.display = "none";}
+    function twoA(){threed.style.display = "none"; twod.style.display = "block"; oned.style.display = "none";}
+    function oneA(){threed.style.display = "none"; twod.style.display = "none"; oned.style.display = "block";}
+
+    function anima(){
+        document.getElementById("GameContainer").style.display = "none";
+        document.getElementById("travel_animation").style.display = "block";
+    }
+
+    function start(){
+        oned.style.display = "none";
+        document.getElementById("GameContainer").style.display = "block";
+        document.getElementById("travel_animation").style.display = "none";
+
+        document.getElementById("start").style.display = "none";
+        let progres = document.getElementById("buttons");
+        progres.style.backgroundImage = "linear-gradient(-30deg, #36D1DC, #5B86E5)";
+        progres.style.width = "0%";
+
+        shuffle( document.querySelectorAll('#card_space > div') );
+        Cards = card1Space.children;
+        for (let y = 0; y < Cards.length; y++) {
+            const poke = Cards[y];
+            const pokeImg = poke.children[0];
+            const pokeSrc = pokeImg.src;
+
+            let game = pokeSrc.indexOf("game");
+            let slice_at = game+5;
+            
+            let pokeMon = pokeSrc.slice(slice_at);
+            init_poke_array1.push(pokeMon);
+            // console.log(pokeImg);
+            // console.log(pokeSrc);
+
+        }
+
+        console.log(init_poke_array1);
+
+        for(let i = 0; i < Cards.length; i++ ){
+            const cardElement = Cards[i];
+            cardElement.style.transform = "translate(200%,0%) scale(0.7)";
+            cardElement.style.position = "absolute";
+        };
+
+        let card_s2 = document.getElementById("card_space_2");
+        card_s2.style.display = "grid";
+
+        let progress = 0;
+        // Card Space 2 Interaction
+        var Cards2 = card_s2.children;
+        // console.log(Cards2);
+        for (let i = 0; i < Cards2.length; i++) {
+            const card2 = Cards2[i];
+            // const card1img = card1.children[0];
+            // const card1src = card1.src;
+            
+            card2.addEventListener("dragover", (e) =>{
+                e.preventDefault();
+                card2.classList.add("hovered");
+            })
+
+            card2.addEventListener("dragleave", () =>{
+                card2.classList.remove("hovered");
+            })
+
+            card2.addEventListener("drop", () =>{
+                card2.classList.remove("hovered");
+                // console.log(init_poke_array);
+                let card2Img = card2.children[0];
+                init_poke_array1.reverse();
+                const pokemon2 = init_poke_array1[0];
+                // let pokeIndex = pokemon2.indexOf("game") + 5;
+                // let srcMain = pokemon2.slice(pokeIndex);
+                card2Img.src = pokemon2;
+
+                init_poke_array1.reverse();
+                init_poke_array1.pop();
+                card1Space.removeChild(card1Space.lastElementChild);
+                Cards = card1Space.children;
+                progress += 12.5
+                JSON.stringify(progress);
+                progres.style.width = progress + "%";
+
+                let val = progres.style.width;
+                if(val === "100%"){
+                    document.getElementById("submit").style.display = "block";
+                };
+            });
+        };
+
+        
+    };
+    
+    let cards2 = document.getElementById("card_space_2").children;
+    function submit(){
+        for (let z = 0; z < cards2.length; z++) {
+            const divElement = cards2[z];
+            const pokeImg = divElement.children[0];
+            const poke_src = pokeImg.src;
+
+            // console.log(pokeImg);
+            let slice_at = poke_src.indexOf("game") + 5;
+            let main_src = poke_src.slice(slice_at, -4);
+            final_poke_array.push(main_src);
+            
+        }
+        console.log(final_poke_array);
+
+        for (let y = 0; y < final_poke_array.length; y++) {
+            const element = final_poke_array[y];
+            if(element === "game."){
+                alert("Please fill all the cells.")
+                final_poke_array = [];
+            }
+        };
+
+        let count = 0;
+
+        for (let z = 0; z < init_poke_array.length; z++) {
+            const pokemon1 = init_poke_array[z];
+            const pokemon2 = final_poke_array[z];
+            if(pokemon1 === pokemon2){
+                count+=10;
+            }else{
+                count+=0;
+            }   
+        }
+        console.log(count);
+        // count = 60;
+        document.getElementById("GameContainer").style.display = "none";
+        document.getElementById("ResultContainer").style.display = "block";
+        let rot = (-180 + (count*2.25));
+        let rot_str = "translate(-50%) rotate(" + rot + "deg)";
+        console.log(rot_str);
+        document.getElementById("circle_progress_bar").style.transform = rot_str;
+        document.getElementById("score").innerHTML = count + '/80';
+
+        if(count<=30){
+            document.getElementById("comment").innerText = "Try Again ! 🙁";
+        }else if(count>30 && count<=60){
+            document.getElementById("comment").innerText = "Well done ! 😀";
+        }else if(count === 70){
+            document.getElementById("comment").innerText = "Haha, you got me well ! 😅";
+        }else if(count === 80){
+            document.getElementById("comment").innerText = "Bravo ! 🎊";
+        }
+
+        document.getElementById("submit").style.display = "none";
+        document.getElementById("play_again").style.display = "block";
+    }
+
+    // submit();
+
+    function playAgain(){
+        final_poke_array = [];
+        window.location.reload();
+    }
+</script>
+</body>
+</html>
