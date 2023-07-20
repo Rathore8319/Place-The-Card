@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  /* #shuffle > div {
+    float: left;
+    line-height: 30px;
+    width: 30px;
+    text-align: center;
+    background-color: steelblue;
+    color: #fff;
+    border-radius: 4px;
+    margin: 3px;
+}
+*/
+#card_space {
+    /* max-width: 360px; */
+    display: inline-flex;
+} 
+
+#card, #card2{
+        width: 200px;
+        height: 300px;
+        background-color: rgba(224, 224, 224, 0.496);
+        margin: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 2px 2px rgba(162, 162, 162, 0.878) inset;
+        backdrop-filter: blur(5px);
+        overflow: hidden;
+        text-align: center;
+    }
+
+    img{
+        width: 150px;
+        height: 150px;
+        padding-top: 25%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        /* transition: 3s; */
+    }
+</style>
+<body>
+  <div id="card_space">
+        <div id = "card" draggable="true" class="1"><img src="pikachu.png" alt=""></div>
+        <div id = "card" draggable="true" class="2"><img src="snorlax.png" alt=""></div>
+        <div id = "card" draggable="true"><img src="charizard.png" alt=""></div>
+        <div id = "card" draggable="true"><img src="flareon.png" alt=""></div>
+        <div id = "card" draggable="true" class="5"><img src="lapras.png" alt=""></div>
+        <div id = "card" draggable="true"><img src="rhydon.png" alt=""></div>
+        <div id = "card" draggable="true"><img src="nidoking.png" alt=""></div>
+        <div id = "card" draggable="true"><img src="dragonite.png" alt=""></div>
+</div>
+<button>Shuffle</button>
+
+<script>
+// Main function for images random
+
+// Shuffle function
+function shuffle(elems) {
+console.log(card_space.children);
+
+  allElems = (function(){
+    var ret = [], l = elems.length;
+    while (l--) { ret[ret.length] = elems[l]; }
+    return ret;
+ })();
+
+ var shuffled = (function(){
+     var l = allElems.length, ret = [];
+     while (l--) {
+         var random = Math.floor(Math.random() * allElems.length),
+             randEl = allElems[random].cloneNode(true);
+         allElems.splice(random, 1);
+         ret[ret.length] = randEl;
+     }
+     return ret; 
+ })(), l = elems.length;
+
+ while (l--) {
+     elems[l].parentNode.insertBefore(shuffled[l], elems[l].nextSibling);
+     elems[l].parentNode.removeChild(elems[l]);
+ }
+
+}
+
+var button = document.querySelector('button');
+// button.addEventListener('click', function() { shuffle( document.querySelectorAll('#card_space > div') ) }, false);
+shuffle( document.querySelectorAll('#card_space > div') )
+
+
+</script>
+</body>
+</html>

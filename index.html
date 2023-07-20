@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place the Card</title>
+</head>
+<style>
+    body{
+        margin: 0px;
+        padding: 0px;
+        background-image: url(bg.jpg);
+        background-repeat: no-repeat;
+        background-size:cover;
+    }
+
+    #StartContainer, #letsGo, #how-to-play-card{
+        width: 1200px;
+        height: 90vh;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5vh;
+        transition: 1s;
+    }
+
+    @font-face {
+        font-family: retroFont;
+        src: url(JustMyType-KePl.ttf);
+    }
+/* Lets Go Codes */
+    #letsGo{
+        display: block;
+        
+    }
+
+    #letsGo button{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: rgba(227, 227, 227, 0.574);
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 40px;
+        border-radius: 15px;
+        font-family: retroFont;
+    }
+
+/* Start Page Codes */
+    #StartContainer{
+        display: none;
+        overflow: hidden;
+    }
+
+    #parallex{
+        height: 85%;
+        margin-top: 7vh;
+        position: relative;
+        overflow: hidden;
+        transform-origin: top;
+    }
+
+    #parallex img{
+        width: 100%;
+        position: absolute;
+        top: -100;
+        left: 0;
+        pointer-events: none;
+        transition: 2s;
+    }
+
+    .hill{
+        animation-name: showup-hill;
+        animation-duration: 2s;
+        animation-timing-function: ease-in;
+        animation-delay: 0s;
+    }
+@keyframes showup-hill {
+    0%{transform: translateY(100%);}
+    100%{top: 0;}   
+}
+
+    #tree,#leaf,#play_holder,#plant{
+        transform-origin: bottom;
+        display: none;
+    }
+
+    .show-tree{
+        animation-name: showup-tree;
+        animation-duration: 1s;
+        animation-timing-function: ease-in;
+    }
+
+@keyframes showup-tree {
+    0%{transform: rotateX(70deg); display: none;}
+    100%{transform: rotateX(0deg); display: block;}
+}
+
+    .show-leaf{
+        animation-name: showup-leaf;
+        animation-duration: 2s;
+        animation-timing-function: ease-in;
+    }
+
+@keyframes showup-leaf {
+    0%{transform: translateX(100%);}
+    100%{transform: translateX(0);}
+}
+
+    .show-plant{
+        animation-name: showup-hill;
+        animation-duration: 2s;
+        animation-timing-function: ease-in;
+    }
+
+
+    #play_holder{
+        position: absolute;
+        text-align: center;
+        top: 0%;
+        width: 300px;
+        height: 400px;
+        background-image: url(Parrallex/placeholder.png);
+        /* background-color: gray; */
+        left: 50%;
+        transform: translateX(-70%);
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: 2s;
+        transform-origin: top;
+        filter: drop-shadow(0px 0px 1px rgb(94, 94, 94));
+        animation-name: placehold_swing;
+        animation-duration: 2s;
+    }
+
+    @keyframes placehold_swing {
+        0%{transform: translate(-70%,-100%);}
+        25%{transform: translate(-70%, -10%) rotateZ(30deg);}
+        50%{transform: translate(-70%,0%) rotateZ(-30deg);}
+        100%{transform: translate(-70%,0%)};
+    }
+
+    #play_button{
+        font-size: 25px;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        position: absolute;
+        width: 90px;
+        height: 30px;
+        bottom: 30%;
+        left: 50%;
+        background-color: rgb(206, 138, 43);
+        border-radius: 15px;
+        box-shadow: 0px 0px 4px rgb(21, 20, 20) inset;
+        cursor: pointer;
+        color: black;
+        text-decoration: none;
+    }
+
+
+/* How to play game page */
+    #how-to-play-card{
+        background-image: url(Parrallex/20008380_6221852.svg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+        display: none;
+    }
+
+    #how-to-play-container{
+        width: 80%;
+        height: 90%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: rgba(145, 145, 145, 0.629);
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        text-align: center;
+    }
+
+    #how-to-play-container h1 img{
+        transform: scale(0.5);
+    }
+
+    #how-to-play-container p{
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: large;
+        text-align: justify;
+        line-height: 25px;
+        margin-left: 20px;
+        margin-right: 20px;
+        pointer-events: none;
+    }
+
+    #how-to-play-container button{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 10%;
+        width: 100px;
+        font-size: 30px;
+        height: 40px;
+        border-radius: 20px;
+        border: solid rgb(28, 28, 28);
+        box-shadow: 2px 2px 2px 1px rgb(44, 44, 44) inset;
+        text-align: center;
+        font-family: retroFont;
+        background-color: rgb(145, 145, 145, 0.7);
+        backdrop-filter: blur(5px);
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    #move_card{
+        width: 100px;
+        height: 90px;
+        transform-origin: center;
+        transform: translate(100%,-35%) rotate(60deg);
+        background-color: rgba(24, 24, 24, 0.218);
+        backdrop-filter: blur(2px);
+        position: absolute;
+    }
+
+    .anime{
+        animation-name: shine;
+        animation-duration: 3s;
+        z-index: 1;
+    }
+
+@keyframes shine {
+    0%{transform: translate(-50%,-35%) rotate(60deg);}
+    100%{transform: translate(100%,-35%) rotate(60deg);}
+}
+
+audio{
+    position: absolute;
+    opacity: 0;
+}
+</style>
+<body>
+    <!-- Lets Go -->
+    <div id = "letsGo">
+        <button onclick = "letsGO()">
+        Let's Go
+        </button>
+    </div>
+    <!-- Start Window -->
+    <div id = "StartContainer">
+        <div id = "parallex">
+            <div><img src="Parrallex/hill1.png" id = "hill1" class = "hill"></div>
+            <div><img src="Parrallex/hill2.png" id = "hill2" class = "hill"></div>
+            <div><img src="Parrallex/hill3.png" id = "hill3" class = "hill"></div>
+            <div><img src="Parrallex/hill4.png" id = "hill4" class = "hill"></div>
+            <div><img src="Parrallex/hill5.png" id = "hill5" class = "hill"></div>
+            <div><img src="Parrallex/tree.png" id = "tree"></div>
+
+            <!-- Text Space -->
+            <div id = "play_holder">
+                <p id = "play_button" onclick="into_parallex(); setTimeout(new_window,1000)">Play</p>
+            </div>
+
+            <div><img src="Parrallex/leaf.png" id = "leaf"></div>
+            <div><img src="Parrallex/plant.png" id = "plant"></div>
+
+            <audio id = "myAudio">
+                <source src="Parrallex/bgm.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+    </div>
+
+    <!-- How to Play card -->
+    <div id = "how-to-play-card">
+        <div id = "how-to-play-container">
+            <h1>
+                <img src="https://see.fontimg.com/api/renderfont4/KePl/eyJyIjoiZnMiLCJoIjo4MSwidyI6MTI1MCwiZnMiOjY1LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/SG93IHRvIFBMQVkh/just-my-type.png" alt="Gaming fonts">
+            </h1>
+            <p>The cards are auto-arranged in 8 slots randomly at the start of the game. You will be given 10 seconds to remember the positions of each card, and then the cards will move away to a container besides. 
+                <br><br>Now, you are to arrange the cards in their respective slots. The game is of 80 points, 10 points each correct position you define.
+                <br><br>- There is no limit in arranging of card. 
+                <br>- You can place a card once only at a place. 
+                <br>- (Imp) Dont overlap over cards, if once placed, or else you lose one card for nothing.
+                <br><br>Hit submit once you finish placing all the cards..
+
+                <br><br>That's it. A piece of cake, and you are set to go.
+                <br> Instructions:
+                As you press, Let's Go !!! you will directed to game, where as you press Start, your ten seconds countdown starts on for remembering the positions.
+            </p>
+
+            <button onclick = " button_transition(); setTimeout(startGame, 1000);">
+                <div id="move_card"></div>
+                <a href="game/game.html" style="color: rgb(38, 38, 38); text-decoration: none;">Let's Go !!!</a>
+            </button>
+        </div>
+    </div>
+<script>
+// Element lister
+let hill1 = document.getElementById("hill1");
+let hill2 = document.getElementById("hill2");
+let hill3 = document.getElementById("hill3");
+let hill4 = document.getElementById("hill4");
+let hill5 = document.getElementById("hill5");
+let tree = document.getElementById("tree");
+let leaf= document.getElementById("leaf");
+let plant = document.getElementById("plant");
+let play_holder = document.getElementById("play_holder");
+
+// Animation window codes
+function letsGO(){
+    let audio = document.getElementById("myAudio");
+    audio.autoplay = true;
+    audio.loop = true;
+    audio.play();
+
+    document.getElementById("letsGo").style.display = "none";
+    document.getElementById("StartContainer").style.display = "block";
+    setTimeout(function(){ tree.style.display = "block"; tree.classList.add("show-tree") }, 2000);
+    setTimeout(function(){ leaf.style.display = "block"; leaf.classList.add("show-leaf") }, 1000);
+    setTimeout(function(){ plant.style.display = "block"; plant.classList.add("show-plant") }, 1000);
+    setTimeout(function(){ play_holder.style.display = "block"; play_holder.classList.add("show-plant") }, 3000);
+
+}
+
+// Start WIndow Codes
+function into_parallex(){
+    hill1.style.transform = "translateY(100%)";
+    hill2.style.transform = "translate(-100%, 50%)";
+    hill3.style.transform = "translate(100%, 50%)";
+    hill4.style.transform = "translateX(-100%)";
+    hill5.style.transform = "translateX(100%)";
+    leaf.style.transform = "translate(100%,-100%)";
+    tree.style.transform = "translate(0%,100%)";
+    plant.style.transform = "translate(0%,100%)";
+    play_holder.style.transform = "translate(-70%,-100%)";
+
+    // let time_new = setTimeout(new_window, 1000);
+}
+
+    function new_window() {
+        document.getElementById("StartContainer").style.display = "none";
+        document.getElementById("how-to-play-card").style.display = "block";
+    };
+
+    function button_transition(){
+        let anime = document.querySelector("button").children[0];
+        anime.classList.add("anime");
+    }
+
+</script>
+</body>
+</html>

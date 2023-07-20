@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  /* #shuffle > div {
+    float: left;
+    line-height: 30px;
+    width: 30px;
+    text-align: center;
+    background-color: steelblue;
+    color: #fff;
+    border-radius: 4px;
+    margin: 3px;
+}
+*/
+#card_space {
+    /* max-width: 360px; */
+    display: inline-flex;
+} 
+
+#card, #card2{
+        width: 200px;
+        height: 300px;
+        background-color: rgba(224, 224, 224, 0.496);
+        margin: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 2px 2px rgba(162, 162, 162, 0.878) inset;
+        backdrop-filter: blur(5px);
+        overflow: hidden;
+        text-align: center;
+    }
+
+    img{
+        width: 150px;
+        height: 150px;
+        padding-top: 25%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        /* transition: 3s; */
+    }
+</style>
+<body>
+<div id="card_space">
+        <div id = "loc">'http://127.0.0.1:3000/Cards_Predictor/game/nidoking.png'</div>
+        <div id = "loc">'http://127.0.0.1:3000/Cards_Predictor/game/pikachu.png'</div>
+        <div id = "loc">'http://127.0.0.1:3000/Cards_Predictor/game/snorlax.png'</div>
+        <div id = "loc">'http://127.0.0.1:3000/Cards_Predictor/game/charizard.png'</div>
+        
+</div>
+
+<button onclick="slice1()">Slice</button>
+
+<div id="card_space2">
+    Hello World
+</div>
+
+
+<script>
+let string1 = document.getElementById("card_space").innerText;
+let string2 = document.getElementById("card_space2").innerText;
+let cards = document.getElementById("card_space").children;
+let init_poke_array1 = [];
+console.log(typeof(string1));
+function slice1(){
+    for (let i = 0; i < cards.length; i++) {
+        const element = cards[i];
+        const strings = element.innerText;
+        // console.log(strings);
+
+        let game = strings.indexOf("game");
+        let slice_at = game+5;
+        console.log(slice_at);
+
+        let new_str = strings.slice(slice_at, -1);
+        init_poke_array1.push(new_str);
+    }
+
+    console.log(init_poke_array1);
+}
+
+</script>
+</body>
+</html>
